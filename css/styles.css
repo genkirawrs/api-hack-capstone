@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    display:flex;
+    align-items:center;
+    padding:0% 5% 0% 5%;
+    width:100%;
+}
+
+body {
+    width:100%;
+}
+
+main {
+    display:block;
+    width:100%;
+    border:1px solid black
+}
+
+section {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items:center;
+    line-height:1.7em;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Recipe Finder, a humble recipe searching api">
+    <title>Recipe Finder</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/recipes.css">
+</head>
+<body>
+    <nav>
+    </nav> 
+    <main>
+        <section id="simple-search-form">
+            <form id="simple-form">
+                <label for="recipe-search-term">Search for a recipe!</label>
+                <br>
+                <input type="text" id="recipe-search-term" value="" placeholder="ie: burgers" required>
+                <br><br>
+                <label for="max-results">Enter number of recipes to return:</label>
+                <br>
+                <input type="number" id="max-results" value="9" min="1">
+                <br><br>
+                <button id="submit-button" type="submit">Search for Recipes</button>
+            </form> 
+        </section>
+        <section id="advanced-search-form">
+
+        </section>
+
+        <p id="search-progress"></p>
+        <section id="recipes-list"></section>
+        <section id="full-recipe"></section>
+    </main>
+    <footer>
+        copyright 2020
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/theMealAPI.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+        $(initHomeElements);
+    </script>
+</body>
+</html>
