@@ -10,28 +10,33 @@
 </head>
 <body>
     <nav>
+        <a href="javascript:loadRecipeRandomizer();">Surprise Me!</a>
     </nav> 
     <main>
-        <section id="simple-search-form">
-            <form id="simple-form">
-                <label for="recipe-search-term">Search for a recipe!</label>
-                <br>
-                <input type="text" id="recipe-search-term" value="" placeholder="ie: burgers" required>
-                <br><br>
-                <label for="max-results">Enter number of recipes to return:</label>
-                <br>
-                <input type="number" id="max-results" value="9" min="1">
-                <br><br>
-                <button id="submit-button" type="submit">Search for Recipes</button>
-            </form> 
+        <section id="search-panel">
+            <section id="simple-search-form">
+                <form id="simple-form">
+                    <label for="recipe-search-term">Search for a recipe!</label>
+                    <br>
+                    <input type="text" id="recipe-search-term" value="" placeholder="ie: burgers" required>
+                    <br><br>
+                    <label for="max-results">Enter number of recipes to return:</label>
+                    <br>
+                    <input type="number" id="max-results" value="9" min="1">
+                    <br><br>
+                    <button id="submit-button" type="submit">Search for Recipes</button>
+                </form> 
+            </section>
+            <p id="search-progress"></p>
+            <section id="recipes-list"></section>
+            <section id="full-recipe"></section>
         </section>
-        <section id="advanced-search-form">
-
+        <section id="random-panel" style="display:none;">
+            <br><br>
+            <button type="button" onclick="getRandomRecipe()" style="padding:10px;font-size:20px;">Roll the Dice!</button>
+            <br><br>
+            <section id="random-result">Random!</section>
         </section>
-
-        <p id="search-progress"></p>
-        <section id="recipes-list"></section>
-        <section id="full-recipe"></section>
     </main>
     <footer>
         copyright 2020

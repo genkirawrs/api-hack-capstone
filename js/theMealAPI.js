@@ -63,46 +63,9 @@ function searchByRecipeID(recipeID){
     })
     .then(responseJson => {
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
-        
-        let ingredientsHTML = ""
-        $.each(mealDetails.ingredients, function(){
-            let list = this;
-            ingredientsHTML = `${ingredientsHTML}<li>${list}</li>`;
+        let recipeHTML = formatRecipeDisplay(mealDetails);
 
-        });
-
-        let instructionsHTML = "";
-        $.each(mealDetails.instructions, function(){
-            let list = this;
-            instructionsHTML = `${instructionsHTML}<li>${list}</li>`;
-
-        });
-
-        $('#full-recipe').html(`
-        <div style="position:relative;width:70%;">
-        <div style="float:right">
-        <img src="${mealDetails.img}" width="300">
-        <br>
-        print recipe link
-        <br>
-        grocery list link
-        </div>
-        Name: ${mealDetails.name}
-        <br>
-
-        Ingredients:<br>
-        <ul>${ingredientsHTML}</ul>
-        <br><br>
-        Instructions:<br>
-        <ul>${instructionsHTML}</ul>
-        <br><br>
-        More on this recipe:
-        <br>
-            <div id="recipe-videos">Loading recipe videos...</div>
-        </div>
-
-        `);
-
+        $('#full-recipe').html(recipeHTML);
         $('#recipes-list').hide()
         $('#simple-search-form').hide();
         $('#full-recipe').show();
@@ -128,7 +91,11 @@ function getRandomRecipe(){
         throw new Error('hm');
     })
     .then(responseJson => {
-        console.log(responseJson);
+        let mealDetails = formatRecipeDetails(responseJson.meals[0]);
+        let recipeHTML = formatRecipeDisplay(mealDetails);
+
+        $('#random-result').html(recipeHTML);
+
     })
     .catch(error => {
         console.log("error!");
@@ -331,4 +298,50 @@ function backToSearchResults() {
 
 function loadFullRecipe(mealId){
     searchByRecipeID(mealId);
+}
+
+function formatRecipeDisplay(mealDetails){
+    let ingredientsHTML = ""
+    $.each(mealDetails.ingredients, function(){
+        let list = this;
+        ingredientsHTML = `${ingredientsHTML}<li>${list}</li>`;
+    });
+
+    let instructionsHTML = "";
+    $.each(mealDetails.instructions, function(){
+        let list = this;
+        instructionsHTML = `${instructionsHTML}<li>${list}</li>`;
+    });
+
+    let returnHTML = `
+    <div style="position:relative;width:70%;">
+    <div style="float:right">
+    <img src="${mealDetails.img}" width="300">
+    <br>
+    print recipe link
+    <br>
+    grocery list link
+    </div>
+    Name: ${mealDetails.name}
+    <br>
+
+    Ingredients:<br>
+    <ul>${ingredientsHTML}</ul>
+    <br><br>
+    Instructions:<br>
+    <ul>${instructionsHTML}</ul>
+    <br><br>
+    More on this recipe:
+    <br>
+        <div id="recipe-videos">Loading recipe videos...</div>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function loadRecipeRandomizer(){
+    $('#search-panel').hide();
+    $('#random-panel').show();
+    getRandomRecipe();
 }

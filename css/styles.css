@@ -26,3 +26,12 @@ section {
     align-items:center;
     line-height:1.7em;
 }
+
+#simple-search-form, #random-result{
+    width:100%;
+}
+
+#random-panel {
+    display:flex;
+    flex-direction:column;
+}
