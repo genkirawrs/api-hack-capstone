@@ -64,13 +64,13 @@ function searchByRecipeID(recipeID){
     .then(responseJson => {
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
         let recipeHTML = formatRecipeDisplay(mealDetails);
-
+console.log(mealDetails);
         $('#full-recipe').html(recipeHTML);
         $('#recipes-list').hide()
         $('#simple-search-form').hide();
         $('#full-recipe').show();
         $('#search-progress').html('<a href="javascript:backToSearchResults()"><< Back to Search Results</a>');
-
+        getYouTubeVideos(mealDetails.name);
     })
     .catch(error => {
         console.log("recipe id error!");
@@ -266,11 +266,12 @@ function formatRecipeDetails(recipe){
         img: recipe.strMealThumb,
         ingredients: [],
         instructions: [],
-        videos: [recipe.strYoutube]
+        video: recipe.strYoutube.split("v=").pop()
     };
 
     let ingredientsList = [];
     let mealInstructions = recipe.strInstructions;
+
 
     for (let key of Object.keys(recipe)) {
         if (key.startsWith('strIngredient') && recipe[key].length > 0) {
@@ -314,16 +315,16 @@ function formatRecipeDisplay(mealDetails){
     });
 
     let returnHTML = `
-    <div style="position:relative;width:70%;">
-    <div style="float:right">
-    <img src="${mealDetails.img}" width="300">
+    <div style="position:relative;width:90%;">
+    <div style="float:right;width:35%;">
+    <img src="${mealDetails.img}" width="90%">
     <br>
     print recipe link
     <br>
     grocery list link
     </div>
-    Name: ${mealDetails.name}
-    <br>
+    ${mealDetails.name}
+    <br><br>
 
     Ingredients:<br>
     <ul>${ingredientsHTML}</ul>
@@ -333,8 +334,16 @@ function formatRecipeDisplay(mealDetails){
     <br><br>
     More on this recipe:
     <br>
-        <div id="recipe-videos">Loading recipe videos...</div>
     </div>
+        <section id="recipe-videos">
+            <section id="video-player">
+                <iframe id="playable-video" src="https://www.youtube.com/embed/${mealDetails.video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </section>
+            <section id="more-videos">
+            <ul id="video-thumbs"></ul>
+            </section>
+        </section>
+
     `;
 
     return returnHTML;
