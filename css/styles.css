@@ -58,6 +58,10 @@ iframe {
     margin-inline-end: 20px;
 }
 
+#video-thumbs li a {
+    display:flex;
+}
+
 h3 {
     margin-block-start: 0;
     margin-block-end: 0;

@@ -95,6 +95,7 @@ function getRandomRecipe(){
         let recipeHTML = formatRecipeDisplay(mealDetails);
 
         $('#random-result').html(recipeHTML);
+        getYouTubeVideos(mealDetails.name);
 
     })
     .catch(error => {
