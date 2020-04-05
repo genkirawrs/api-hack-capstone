@@ -396,6 +396,12 @@ function loadSearchForm(){
 }
 
 function loadRecipeSearch(){
+    $('#recipe-search-term').prop('value', "");
+    $('#max-results').prop('value', 9);
+    $('#simple-search-form').show();
+    $('#search-progress').html('');
+    $('#full-recipe').html('');
+    $('#recipes-list').show();
     $('#search-panel').show();
     $('#random-panel').hide();
     getRecentRecipes();
