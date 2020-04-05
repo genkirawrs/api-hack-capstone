@@ -22,7 +22,7 @@ function getRecentRecipes(qty=9){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
         //console.log(responseJson.meals);
@@ -44,7 +44,6 @@ function getRecentRecipes(qty=9){
         }
     })
     .catch(error => {
-        console.log(error);
         //$('#search-progress').text(`Sorry, there was an error: ${error.message}`);
     });
 }
@@ -59,12 +58,13 @@ function searchByRecipeID(recipeID){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
+        ;
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
         let recipeHTML = formatRecipeDisplay(mealDetails);
-console.log(mealDetails);
+
         $('#full-recipe').html(recipeHTML);
         $('#recipes-list').hide()
         $('#simple-search-form').hide();
@@ -73,8 +73,11 @@ console.log(mealDetails);
         getYouTubeVideos(mealDetails.name);
     })
     .catch(error => {
-        console.log("recipe id error!");
-        //$('#search-progress').text(`Sorry, there was an error: ${error.message}`);
+        $('#full-recipe').html('Sorry, there was an error looking up this recipe. Please try again later.');
+        $('#recipes-list').hide()
+        $('#simple-search-form').hide();
+        $('#full-recipe').show();
+
     });
 
 }
@@ -88,7 +91,7 @@ function getRandomRecipe(){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
@@ -99,8 +102,7 @@ function getRandomRecipe(){
 
     })
     .catch(error => {
-        console.log("error!");
-        //$('#search-progress').text(`Sorry, there was an error: ${error.message}`);
+        $('#random-result').html('Sorry there was an error, please try again later.');
     });
 
 }
@@ -114,14 +116,21 @@ function getRecipeTypeList(){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
+        let categoriesHTML = "";
         console.log(responseJson);
+        $.each(responseJson.meals, function(){
+            let cat = this.strCategory;
+            categoriesHTML = `${categoriesHTML}<li><a href="javascript:getRecipeType('${cat}')">${cat}</a></li>`;
+        });
+        $('#recipe-categories').html(categoriesHTML);
+        $('#type-search').show();
     })
     .catch(error => {
-        console.log("error!");
-        //$('#search-progress').text(`Sorry, there was an error: ${error.message}`);
+        $('#recipe-categories').html("Sorry, there wasn an error. Please try again later.");
+        $('#type-search').show();
     });
 
 }
@@ -135,14 +144,31 @@ function getRecipeType(type){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
-        console.log(responseJson);
+        $('#recipes-list').html("");
+        $('#search-progress').text('Your Search Results:');
+        let count = 0;
+        let meals = responseJson.meals;
+        while(count < meals.length){
+            if( count >= responseJson.meals.length){
+                break;
+            }
+            $('#recipes-list').append(`
+            <div class="recipe-grid-square" id="recipe-${meals[count]['idMeal']}">
+                <a href="javascript:loadFullRecipe(${meals[count]['idMeal']})">
+                <img src="${meals[count]['strMealThumb']}" alt="Image of ${meals[count]['strMeal']}" title="${meals[count]['strMeal']}" class="recipe-grid-img">
+                <br>
+                ${meals[count]['strMeal']}   
+                </a>
+            </div>
+            `);
+            count++;
+        }
     })
     .catch(error => {
-        console.log("error!");
-        //$('#search-progress').text(`Sorry, there was an error: ${error.message}`);
+        $('#search-progress').text(`Sorry, there was an error. Please try again later.`);
     });
 
 }
@@ -157,7 +183,7 @@ function searchRecipe(phrase,qty){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
         if(responseJson.meals.length > 0){
@@ -204,7 +230,7 @@ function searchByIngredients(ingredients,qty,searchFiller=0){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
         if(searchFiller){
@@ -355,4 +381,16 @@ function loadRecipeRandomizer(){
     $('#search-panel').hide();
     $('#random-panel').show();
     getRandomRecipe();
+}
+
+function loadSearchByType(){
+    $('#simple-form').hide();
+    getRecipeTypeList();
+}
+
+function loadSearchForm(){
+    $('#type-search').hide();
+    $('#simple-form').show();
+    $('#recipe-categories').html('');
+
 }

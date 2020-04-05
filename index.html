@@ -40,9 +40,15 @@
                     <br>
                     <input type="number" id="max-results" value="9" min="1">
                     <br><br>
-                    <button id="submit-button" type="submit">Search for Recipes</button>
+                    <button id="submit-button" type="submit">Search for Recipes</button> <a href="javascript:loadSearchByType();">Or view a recipe categories</a>
                 </form> 
+                <section id="type-search" style="display:none;">
+                    <ul id="recipe-categories"></ul>
+                    <br>
+                    <a href="javascript:loadSearchForm()">back to search by name/ingredient</a>
+                </section>
             </section>
+            
             <p id="search-progress"></p>
             <section id="recipes-list"></section>
             <section id="full-recipe"></section>
