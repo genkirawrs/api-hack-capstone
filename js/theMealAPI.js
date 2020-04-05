@@ -394,3 +394,9 @@ function loadSearchForm(){
     $('#recipe-categories').html('');
 
 }
+
+function loadRecipeSearch(){
+    $('#search-panel').show();
+    $('#random-panel').hide();
+    getRecentRecipes();
+}
