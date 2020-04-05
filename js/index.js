@@ -1,3 +1,8 @@
+function sendRequest(){
+alert('TBD');
+
+}
+
 function initHomeElements() {
     $('#simple-form').submit(function(event) {
       event.preventDefault();

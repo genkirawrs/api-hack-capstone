@@ -13,10 +13,14 @@ body {
     width:100%;
 }
 
+nav {
+    border-bottom:1px solid #666666;
+    padding-bottom:15px;
+}
+
 main {
     display:block;
     width:100%;
-    border:1px solid black
 }
 
 section {
@@ -29,6 +33,7 @@ section {
 
 #simple-search-form, #random-result{
     width:100%;
+    padding-top:25px;
 }
 
 #random-panel {
@@ -41,6 +46,9 @@ section {
     flex-direction:column;
 }
 
+#recipes-list, #full-recipe {
+    padding-top:25px;
+}
 
 #more-videos {
     display:inline-block;
@@ -67,4 +75,22 @@ h3 {
     margin-block-end: 0;
     font-size:16px;
     line-height:20px;
+}
+
+input {
+    padding:10px;
+    font-size:18px;
+    border-radius:5px;
+    border:1px solid #666666;
+}
+
+button {
+    padding:10px;
+    font-size:18px;
+    border-radius:5px;
+}
+
+#search-progress {
+    text-align:left;
+    width:100%;
 }

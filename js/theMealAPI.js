@@ -263,6 +263,7 @@ function formatRecipeSearch(parameters,type){
 function formatRecipeDetails(recipe){
     //receives an object and returns something we can use for display
     let meal = {
+        id: recipe.idMeal,
         name: recipe.strMeal,
         img: recipe.strMealThumb,
         ingredients: [],
@@ -320,9 +321,9 @@ function formatRecipeDisplay(mealDetails){
     <div style="float:right;width:35%;">
     <img src="${mealDetails.img}" width="90%">
     <br>
-    print recipe link
+    <a href="printable.html?recipe=${mealDetails.id}" alt="Open new page to print recipe" target="_blank">print recipe link</a>
     <br>
-    grocery list link
+    <a href="printable.html?grocery=${mealDetails.id}" alt="Open new page to print recipe shopping list" target="_blank">grocery list link</a>
     </div>
     ${mealDetails.name}
     <br><br>

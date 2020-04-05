@@ -10,9 +10,25 @@
 </head>
 <body>
     <nav>
+        <a href="/">Recipe Finder API</a>
+        &nbsp;&nbsp;&nbsp;
         <a href="javascript:loadRecipeRandomizer();">Surprise Me!</a>
+        &nbsp;&nbsp;&nbsp;
+        <!--<a href="javascript:loadRecipeRequestForm();">Request a Recipe</a>-->
     </nav> 
     <main>
+        <section id="request-panel" style="display:none;">
+            <form id="request-form" onsubmit="return false;">
+                <label for="recipe-requested">Enter the recipe you'd like added:</label>
+                
+                <input type="text" id="recipe-requested" value="" placeholder="ie: chicken adobo" required>
+                <br><br>
+                <label for="request-email">I'd like to be contacted when the recipe becomes available:</label>
+                <input type="email" id="request-email" value="" placeholder="you@example.com">
+                <br><br>
+                <button id="submit-button" type="submit" onclick="sendRequest();">Submit Request</button>
+            </form>
+        </section>
         <section id="search-panel">
             <section id="simple-search-form">
                 <form id="simple-form">
