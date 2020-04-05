@@ -64,6 +64,8 @@ iframe {
 #video-thumbs {
     list-style:none;
     margin-inline-end: 20px;
+    display:flex;
+    flex-direction:column;
 }
 
 #video-thumbs li a {
