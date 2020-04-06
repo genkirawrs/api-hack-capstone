@@ -94,15 +94,17 @@ function getRandomRecipe(){
         throw new Error();
     })
     .then(responseJson => {
+        console.log(responseJson.meals);
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
         let recipeHTML = formatRecipeDisplay(mealDetails);
 
         $('#random-result').html(recipeHTML);
-        getYouTubeVideos(mealDetails.name);
+       // getYouTubeVideos(mealDetails.name);
 
     })
     .catch(error => {
-        $('#random-result').html('Sorry there was an error, please try again later.');
+        console.log(error);
+        $('#random-result').html('!Sorry there was an error, please try again later.');
     });
 
 }
@@ -287,6 +289,7 @@ function formatRecipeSearch(parameters,type){
 }
 
 function formatRecipeDetails(recipe){
+    console.log(recipe);
     //receives an object and returns something we can use for display
     let meal = {
         id: recipe.idMeal,
@@ -302,7 +305,7 @@ function formatRecipeDetails(recipe){
 
 
     for (let key of Object.keys(recipe)) {
-        if (key.startsWith('strIngredient') && recipe[key].length > 0) {
+        if (key.startsWith('strIngredient') && (recipe[key] != null && recipe[key].length > 0) ) {
             let lineItem = key.split("Ingredient").pop();
             let measurement = `strMeasure${lineItem}`;
             let ingredientLine = `${recipe[key]} - ${recipe[measurement]}`;

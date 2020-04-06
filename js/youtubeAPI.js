@@ -12,14 +12,12 @@ function formatQueryParams(params) {
   }
 
   function displayVideoResults(responseJson) {
-    // if there are previous results, remove them
     console.log(responseJson);
     // iterate through the items array
     for (let i = 0; i < responseJson.items.length; i++){
       // for each video object in the items 
       //array, add a list item to the results 
-      //list with the video title, description,
-      //and thumbnail
+      //list with the video title and thumbnail
       $('#video-thumbs').append(
         `<li style='display:inline-block;margin-bottom:20px;'>
         <a href="javascript:loadVideoToPlayer('${responseJson.items[i].id.videoId}')">
