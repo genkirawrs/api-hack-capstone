@@ -1,3 +1,12 @@
+let deviceMedia = window.matchMedia("(min-width: 1000px)");//set back to 360
+let defaultMaxResults = 10;
+
+if(deviceMedia.matches){
+    defaultMaxResults = 9;
+}
+
+
+ console.log(defaultMaxResults);
 function formatFetchUrl(searchType){
     const apiKey = '9973533';
     const url = 'https://www.themealdb.com/api/json/v2/';
@@ -14,8 +23,8 @@ function formatFetchUrl(searchType){
 }
 
 //these functions will format search parameters and then pass it along to the contact function
-function getRecentRecipes(qty=9){
-    //retrieves specified number of most recent recipes, default 9
+function getRecentRecipes(qty=defaultMaxResults){
+    //retrieves specified number of most recent recipes
     let url = formatFetchUrl('recent');
     fetch(url)
     .then(response => {
@@ -35,7 +44,7 @@ function getRecentRecipes(qty=9){
                     <a href="javascript:loadFullRecipe(${meals[count]['idMeal']})">
                     <img src="${meals[count]['strMealThumb']}" alt="Image of ${meals[count]['strMeal']}" title="${meals[count]['strMeal']}" class="recipe-grid-img">
                     <br>
-                    ${meals[count]['strMeal']}   
+                    <p>${meals[count]['strMeal']}</p>
                     </a>
                 </div>
                 `);
@@ -69,7 +78,7 @@ function searchByRecipeID(recipeID){
         $('#recipes-list').hide()
         $('#simple-search-form').hide();
         $('#full-recipe').show();
-        $('#search-progress').html('<a href="javascript:backToSearchResults()"><< Back to Search Results</a>');
+        $('#search-progress').html('<div class="return-btn"><button class="search_return_btn" onclick="backToSearchResults()">Back to Search Results</button></div>');
         getYouTubeVideos(mealDetails.name);
     })
     .catch(error => {
@@ -320,14 +329,6 @@ function formatRecipeDetails(recipe){
       return meal;
 }
 
-function backToSearchResults() {
-    $('#recipes-list').show()
-    $('#simple-search-form').show();
-    $('#full-recipe').hide();
-    $('#search-progress').html('');
-
-}
-
 function loadFullRecipe(mealId){
     searchByRecipeID(mealId);
 }
@@ -346,35 +347,33 @@ function formatRecipeDisplay(mealDetails){
     });
 
     let returnHTML = `
-    <div style="position:relative;width:90%;">
-    <div style="float:right;width:35%;">
-    <img src="${mealDetails.img}" width="90%">
-    <br>
-    <a href="printable.html?recipe=${mealDetails.id}" alt="Open new page to print recipe" target="_blank">print recipe link</a>
-    <br>
-    <a href="printable.html?grocery=${mealDetails.id}" alt="Open new page to print recipe shopping list" target="_blank">grocery list link</a>
-    </div>
-    ${mealDetails.name}
-    <br><br>
-
-    Ingredients:<br>
-    <ul>${ingredientsHTML}</ul>
-    <br><br>
-    Instructions:<br>
-    <ul>${instructionsHTML}</ul>
-    <br><br>
-    More on this recipe:
-    <br>
-    </div>
-        <section id="recipe-videos">
-            <section id="video-player">
-                <iframe id="playable-video" src="https://www.youtube.com/embed/${mealDetails.video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            </section>
-            <section id="more-videos">
-            <ul id="video-thumbs"></ul>
-            </section>
+    <section class="full-recipe-panel">
+        <section class="full-recipe-img">
+            <img src="${mealDetails.img}">
+            <br>
+            <a href="printable.html?recipe=${mealDetails.id}" alt="Open new page to print recipe" target="_blank">print recipe</a>
+            <br>
+            <a href="printable.html?grocery=${mealDetails.id}" alt="Open new page to print recipe shopping list" target="_blank">grocery list</a>
         </section>
-
+        <section class="full-recipe-name"><h2>${mealDetails.name}</h2></section>
+        <section class="full-recipe-ingredients">
+        <h3>Ingredients:</h3>
+        <ul>${ingredientsHTML}</ul>
+        </section>
+        <section class="full-recipe-instructions">
+        <h3>Instructions:</h3>
+        <ul>${instructionsHTML}</ul>
+        </section>
+        <section id="recipe-videos">
+            <h3>More on this recipe:</h3>
+                <section id="video-player">
+                    <iframe id="playable-video" src="https://www.youtube.com/embed/${mealDetails.video}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </section>
+                <section id="more-videos">
+                <ul id="video-thumbs"></ul>
+                </section>
+        </section>
+    </section>
     `;
 
     return returnHTML;
@@ -400,7 +399,7 @@ function loadSearchForm(){
 
 function loadRecipeSearch(){
     $('#recipe-search-term').prop('value', "");
-    $('#max-results').prop('value', 9);
+    $('#max-results').prop('value', defaultMaxResults);
     $('#simple-search-form').show();
     $('#search-progress').html('');
     $('#full-recipe').html('');
@@ -408,4 +407,12 @@ function loadRecipeSearch(){
     $('#search-panel').show();
     $('#random-panel').hide();
     getRecentRecipes();
+}
+
+function backToSearchResults() {
+    $('#recipes-list').show()
+    $('#simple-search-form').show();
+    $('#full-recipe').hide();
+    $('#search-progress').html('');
+
 }

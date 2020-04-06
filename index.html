@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Welcome to Recipe Finder, a humble recipe searching api">
     <title>Recipe Finder</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:bold,regular,medium&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/recipes.css">
 </head>
 <body>
     <nav>
-        Recipe Finder API
-        &nbsp;&nbsp;&nbsp;
-        <a href="javascript:loadRecipeRandomizer();">Surprise Me!</a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="javascript:loadRecipeSearch();">Search for a Recipe</a>
-        <!--<a href="javascript:loadRecipeRequestForm();">Request a Recipe</a>-->
+        <div class="nav-bar">
+            <h1>Recipe Finder</h1>
+            <div id="menu-hamburger"><button type="button" onclick="toggleMenu();"><img src="imgs/icon_hamburger.png" class="nav-hamburger" alt="expand menu" title="expand menu"></button></div>
+        </div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="javascript:loadRecipeRandomizer();" title="Load Recipe Randomizer View">Surprise Me!</a></li>
+                <li><a href="javascript:loadRecipeSearch();" title="Load Recipe Finder Home">Search for a Recipe</a></li>
+            </ul>               
+        </div>
+            <!--<a href="javascript:loadRecipeRequestForm();">Request a Recipe</a>-->
     </nav> 
     <main>
         <section id="request-panel" style="display:none;">
@@ -32,16 +39,14 @@
         </section>
         <section id="search-panel">
             <section id="simple-search-form">
+                <div class="search-bg"></div>
                 <form id="simple-form">
-                    <label for="recipe-search-term">Search for a recipe!</label>
-                    <br>
-                    <input type="text" id="recipe-search-term" value="" placeholder="ie: burgers" required>
-                    <br><br>
-                    <label for="max-results">Enter number of recipes to return:</label>
-                    <br>
-                    <input type="number" id="max-results" value="9" min="1">
-                    <br><br>
-                    <button id="submit-button" type="submit">Search for Recipes</button> <a href="javascript:loadSearchByType();">Or view a recipe categories</a>
+                    <label for="recipe-search-term">What are you hankering for?</label>
+                    <input type="text" id="recipe-search-term" value="" placeholder="ie: burgers, pasta" required>
+                    <label for="max-results">How many recipes should we retrieve?</label>
+                    <input type="number" id="max-results" value="" min="1">
+                    <button id="submit-button" type="submit">Search for Recipes</button>
+                    <a href="javascript:loadSearchByType();" id="search-by-category">or search by category</a>
                 </form> 
                 <section id="type-search" style="display:none;">
                     <ul id="recipe-categories"></ul>
@@ -50,7 +55,7 @@
                 </section>
             </section>
             
-            <p id="search-progress"></p>
+            <p id="search-progress">Recent Recipes:</p>
             <section id="recipes-list"></section>
             <section id="full-recipe"></section>
         </section>

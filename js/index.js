@@ -3,7 +3,13 @@ alert('TBD');
 
 }
 
+function toggleMenu(){
+  $(".nav-links").toggleClass('nav-links-show');
+}
+
 function initHomeElements() {
+  $('#max-results').prop('value', defaultMaxResults);
+
     $('#simple-form').submit(function(event) {
       event.preventDefault();
       //disable form while we're doing a search

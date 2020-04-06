@@ -1,19 +1,124 @@
-#recipes-list {
-    
-}
-
-.recipe-grid{
-    
-}
-
-.recipe-grid-square {
-    width:30%;
+.return-btn {
     display:inline-block;
-    text-align:center;
-    margin-bottom:25px;
+    text-align:right;
+    width:100%;
+    padding-right:5px;
 }
 
-.recipe-grid-img {
+.search_return_btn {
+    background-color:#FCF6B1;
+    padding:5px;
+    align-self: flex-end;
+    font-size:16px;
+}
+
+.full-recipe-panel {
+    position:relative;
+    width:100%;
+    padding-top:10px;
+    display:flex;
+    flex-direction:column;
+}
+
+.full-recipe-img img {
+    width:100%;
+    border-top:1px solid #11270B;
+    border-bottom:1px solid #11270B;
+}
+
+.full-recipe-name {
+    order:1;
+    text-align:left;
+    width:100%;
+    display:inline-block;
+    padding-left:15px;
+}
+
+.full-recipe-img {
+    order: 2;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.full-recipe-img a {
+    margin-right:10px;
+}
+
+.full-recipe-ingredients{
+    order:3;
+    width:100%;
+    display:flex;
+    justify-content: flex-start;
+    padding-left:15px;
+    flex-direction:column;
+    margin-top:10px;
+}
+
+.full-recipe-ingredients ul {
+    list-style: none;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
+    width:100%;
+
+}
+
+.full-recipe-instructions {
+    order:4;
+    width:100%;
+    display:flex;
+    justify-content: flex-start;
+    padding-left:15px;
+    flex-direction:column;
+    margin-top:10px;
+}
+
+.full-recipe-instructions ul {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 15px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px;
     width:90%;
-    max-width:250px;
+}
+
+#recipe-videos {
+    order:5;
+    width:100%;
+    padding-left:15px;
+    display:flex;
+    flex-direction:column;
+    margin-top:10px;
+}
+
+
+
+
+#recipe-videos {
+    display:flex;
+    flex-direction:column;
+}
+
+#more-videos {
+    display:inline-block;
+    width:100%;
+    position:relative;
+}
+
+iframe {
+    width:320px;
+    height:250px;
+}
+
+#video-thumbs {
+    list-style:none;
+    margin-inline-end: 20px;
+    display:flex;
+    flex-direction:column;
+}
+
+#video-thumbs li a {
+    display:flex;
 }
