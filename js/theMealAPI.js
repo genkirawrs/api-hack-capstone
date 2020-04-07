@@ -136,7 +136,7 @@ function getRecipeTypeList(){
         console.log(responseJson);
         $.each(responseJson.meals, function(){
             let cat = this.strCategory;
-            categoriesHTML = `${categoriesHTML}<li><a href="javascript:getRecipeType('${cat}')">${cat}</a></li>`;
+            categoriesHTML = `${categoriesHTML}<button onclick="getRecipeType('${cat}')">${cat}</button>`;
         });
         $('#recipe-categories').html(categoriesHTML);
         $('#type-search').show();

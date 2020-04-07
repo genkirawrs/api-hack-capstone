@@ -156,9 +156,10 @@ section {
     margin-bottom:20px;
 }
 
-#search-by-category {
+#search-by-category, #search-by-name {
     margin-top:10px;
     text-align:right;
+    align-self:flex-end;
 }
 
 .search-bg{
@@ -178,7 +179,7 @@ section {
     padding-top:25px;
 }
 
-#simple-form {
+#simple-form, #type-search {
     display:flex;
     flex-direction:column;
     z-index:99;
@@ -193,12 +194,18 @@ section {
 
 #recipe-categories {
     display:flex;
+    flex-wrap:wrap;
     width:90%;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 0;
+    justify-content: space-evenly;
 }
 
-#recipe-categories li {
-    display:inline-block;
-    padding:10px;
+#recipe-categories button {
+    margin:5px;
 }
 
 #recipes-list {
