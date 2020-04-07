@@ -7,6 +7,29 @@ function toggleMenu(){
   $(".nav-links").toggleClass('nav-links-show');
 }
 
+function loadRecipeRandomizer(){
+  scrollToTop();
+  toggleMenu();
+  $('#search-panel').hide();
+  $('#random-panel').show();
+  getRandomRecipe();
+}
+
+function loadRecipeSearch(){
+  scrollToTop();
+  toggleMenu();
+  $('#recipe-search-term').prop('value', "");
+  $('#max-results').prop('value', defaultMaxResults);
+  $('#simple-search-form').show();
+  $('#search-progress').html('');
+  $('#full-recipe').html('');
+  $('#recipes-list').show();
+  $('#search-panel').show();
+  $('#random-panel').hide();
+  getRecentRecipes();
+}
+
+
 function initHomeElements() {
   $('#max-results').prop('value', defaultMaxResults);
 

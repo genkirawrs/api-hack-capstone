@@ -11,31 +11,41 @@ function formatQueryParams(params) {
     $('#playable-video').attr('src', `https://www.youtube.com/embed/${videoId}`);
   }
 
-  function displayVideoResults(responseJson) {
-    console.log(responseJson);
+  function displayVideoResults(responseJson,exclude='') {
     // iterate through the items array
-    for (let i = 0; i < responseJson.items.length; i++){
+    let i = 0;
+    let vidPos = 0;
+    while (i < 3){
+      console.log(i);
       // for each video object in the items 
       //array, add a list item to the results 
       //list with the video title and thumbnail
-      $('#video-thumbs').append(
-        `<li style='display:inline-block;margin-bottom:20px;'>
-        <a href="javascript:loadVideoToPlayer('${responseJson.items[i].id.videoId}')">
-        <img src='${responseJson.items[i].snippet.thumbnails.default.url}' style='margin-right:10px;'>
-        <h3 style='align-self:flex-start'>${responseJson.items[i].snippet.title}</h3>
-        </a>
-        </li>`
-      )};
+      if( exclude.length > 0 && responseJson.items[vidPos].id.videoId == exclude ){
+        vidPos++;
+      }else{
+        $('#video-thumbs').append(
+          `<li style='display:inline-block;margin-bottom:20px;'>
+          <a href="javascript:loadVideoToPlayer('${responseJson.items[vidPos].id.videoId}')">
+          <img src='${responseJson.items[vidPos].snippet.thumbnails.default.url}' style='margin-right:10px;'>
+          <h3 style='align-self:flex-start'>${responseJson.items[vidPos].snippet.title}</h3>
+          </a>
+          </li>`
+        );
+        i++;
+        vidPos++;
+      }
+    };
   };
   
-  function getYouTubeVideos(query, maxResults=3) {
+  function getYouTubeVideos(query, excludeVideoID='') {
     const params = {
       key: apiKey,
       q: `${query} recipe`,
       part: 'snippet',
-      maxResults,
+      maxResults: 10,
       type: 'video'
     };
+
     const queryString = formatQueryParams(params)
     const url = searchURL + '?' + queryString;
   
@@ -48,7 +58,7 @@ function formatQueryParams(params) {
         }
         throw new Error(response.statusText);
       })
-      .then(responseJson => displayVideoResults(responseJson))
+      .then(responseJson => displayVideoResults(responseJson,excludeVideoID))
       .catch(err => {
           console.log('uho');
         //$('#js-error-message').text(`Something went wrong: ${err.message}`);

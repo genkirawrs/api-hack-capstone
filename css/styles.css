@@ -151,8 +151,9 @@ section {
 #simple-search-form {
     width:100%;
     padding-top:25px;
-    padding-bottom:25px;
+    padding-bottom:15px;
     position:relative;
+    margin-bottom:20px;
 }
 
 #search-by-category {
@@ -203,6 +204,7 @@ section {
 #recipes-list {
     display:flex;
     justify-content: flex-start;
+    margin-top:10px;
 }
 
 .recipe-grid-square {

@@ -5,8 +5,10 @@ if(deviceMedia.matches){
     defaultMaxResults = 9;
 }
 
+function scrollToTop(){
+    $("html, body").animate({ scrollTop: 0 }, "fast");
+}
 
- console.log(defaultMaxResults);
 function formatFetchUrl(searchType){
     const apiKey = '9973533';
     const url = 'https://www.themealdb.com/api/json/v2/';
@@ -70,18 +72,18 @@ function searchByRecipeID(recipeID){
         throw new Error();
     })
     .then(responseJson => {
-        ;
+        scrollToTop();
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
         let recipeHTML = formatRecipeDisplay(mealDetails);
-
         $('#full-recipe').html(recipeHTML);
         $('#recipes-list').hide()
         $('#simple-search-form').hide();
         $('#full-recipe').show();
         $('#search-progress').html('<div class="return-btn"><button class="search_return_btn" onclick="backToSearchResults()">Back to Search Results</button></div>');
-        getYouTubeVideos(mealDetails.name);
+        getYouTubeVideos(mealDetails.name, mealDetails.video);
     })
     .catch(error => {
+        scrollToTop();
         $('#full-recipe').html('Sorry, there was an error looking up this recipe. Please try again later.');
         $('#recipes-list').hide()
         $('#simple-search-form').hide();
@@ -103,12 +105,12 @@ function getRandomRecipe(){
         throw new Error();
     })
     .then(responseJson => {
-        console.log(responseJson.meals);
+        scrollToTop();
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
         let recipeHTML = formatRecipeDisplay(mealDetails);
 
         $('#random-result').html(recipeHTML);
-       // getYouTubeVideos(mealDetails.name);
+        getYouTubeVideos(mealDetails.name, mealDetails.video);
 
     })
     .catch(error => {
@@ -158,6 +160,7 @@ function getRecipeType(type){
         throw new Error();
     })
     .then(responseJson => {
+        scrollToTop();
         $('#recipes-list').html("");
         $('#search-progress').text('Your Search Results:');
         let count = 0;
@@ -179,6 +182,7 @@ function getRecipeType(type){
         }
     })
     .catch(error => {
+        scrollToTop();
         $('#search-progress').text(`Sorry, there was an error. Please try again later.`);
     });
 
@@ -198,6 +202,7 @@ function searchRecipe(phrase,qty){
     })
     .then(responseJson => {
         if(responseJson.meals.length > 0){
+            scrollToTop();
             $('#recipes-list').html("");
             $('#search-progress').text('Your Search Results:');
             let count = 0;
@@ -245,6 +250,7 @@ function searchByIngredients(ingredients,qty,searchFiller=0){
     })
     .then(responseJson => {
         if(searchFiller){
+            scrollToTop();
             let count = searchFiller;
             let meals = responseJson.meals;
             while(count < qty){
@@ -265,6 +271,7 @@ function searchByIngredients(ingredients,qty,searchFiller=0){
             }
 
         }else{
+            scrollToTop();
             $('#recipes-list').html("");
             let count = 0;
             let meals = responseJson.meals;
@@ -343,7 +350,9 @@ function formatRecipeDisplay(mealDetails){
     let instructionsHTML = "";
     $.each(mealDetails.instructions, function(){
         let list = this;
-        instructionsHTML = `${instructionsHTML}<li>${list}</li>`;
+        if(list.length > 2){
+            instructionsHTML = `${instructionsHTML}<li>${list}</li>`;
+        }
     });
 
     let returnHTML = `
@@ -379,12 +388,6 @@ function formatRecipeDisplay(mealDetails){
     return returnHTML;
 }
 
-function loadRecipeRandomizer(){
-    $('#search-panel').hide();
-    $('#random-panel').show();
-    getRandomRecipe();
-}
-
 function loadSearchByType(){
     $('#simple-form').hide();
     getRecipeTypeList();
@@ -397,19 +400,8 @@ function loadSearchForm(){
 
 }
 
-function loadRecipeSearch(){
-    $('#recipe-search-term').prop('value', "");
-    $('#max-results').prop('value', defaultMaxResults);
-    $('#simple-search-form').show();
-    $('#search-progress').html('');
-    $('#full-recipe').html('');
-    $('#recipes-list').show();
-    $('#search-panel').show();
-    $('#random-panel').hide();
-    getRecentRecipes();
-}
-
 function backToSearchResults() {
+    scrollToTop();
     $('#recipes-list').show()
     $('#simple-search-form').show();
     $('#full-recipe').hide();
