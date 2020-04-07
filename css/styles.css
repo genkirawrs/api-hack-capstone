@@ -38,6 +38,14 @@ h1 {
     font-weight: 500;
 }
 
+.printable {
+    padding:0 5px 15px 15px;
+}
+
+.printable h1 {
+    margin-bottom:15px;
+}
+
 h2{
     font-size:24px;
     margin-block-start: 0;
@@ -140,6 +148,10 @@ main {
     margin-top:50px;
 }
 
+.printable main {
+    margin-top:10px;
+}
+
 section {
     display:flex;
     flex-wrap: wrap;
@@ -235,6 +247,42 @@ section {
     max-width:250px;
     border:1px solid #999999;
     border-radius:5px;
+}
+
+#printable-display {
+    padding:0px;
+}
+
+.printable-recipe {
+    position:relative;
+    width:100%;
+}
+
+.printable-recipe-img {
+    float:right;
+    width:35%;
+}
+
+.printable-recipe-img img {
+    width:90%;
+}
+
+.printable-recipe ul{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 20px;
+    
+}
+
+#printable-recipe-ingredients, #grocery-list {
+    list-style:none;
+    padding-inline-start: 5px;
+}
+
+footer {
+    font-size:13px;
 }
 
 @media screen and (min-width:360px){

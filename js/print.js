@@ -46,17 +46,17 @@ function displayPrintableInfo(displayType,recipeID){
             });
         
             let recipeHTML = `
-            <div style="position:relative;width:90%;">
-            <div style="float:right;width:35%;">
-            <img src="${mealDetails.img}" width="90%">
+            <div class="printable-recipe">
+            <h2>${mealDetails.name}</h2>
+            <br>
+            <div class="printable-recipe-img">
+            <img src="${mealDetails.img}">
             </div>
-            ${mealDetails.name}
-            <br><br>
         
-            Ingredients:<br>
-            <ul>${ingredientsHTML}</ul>
+            <strong>Ingredients:</strong><br>
+            <ul id="printable-recipe-ingredients">${ingredientsHTML}</ul>
             <br><br>
-            Instructions:<br>
+            <strong>Instructions:</strong><br>
             <ul>${instructionsHTML}</ul>
             <br><br>
             </div>`;
@@ -69,15 +69,15 @@ function displayPrintableInfo(displayType,recipeID){
             });
         
             let recipeHTML = `
-            <div style="position:relative;width:90%;">
-            <div style="float:right;width:35%;">
-            <img src="${mealDetails.img}" width="90%">
+            <div class="printable-recipe">
+            <h2>${mealDetails.name}</h2>
+            <br>
+            <div class="printable-recipe-img">
+            <img src="${mealDetails.img}">
             </div>
-            ${mealDetails.name}
-            <br><br>
         
-            Ingredients:<br>
-            <ul style="list-style:none;">${ingredientsHTML}</ul>
+            Grocery List:<br>
+            <ul id="grocery-list">${ingredientsHTML}</ul>
             <br><br>
             </div>`;
             $('#printable-display').html(recipeHTML);
