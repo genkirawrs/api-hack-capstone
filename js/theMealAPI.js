@@ -75,11 +75,12 @@ function searchByRecipeID(recipeID){
         scrollToTop();
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
         let recipeHTML = formatRecipeDisplay(mealDetails);
-        $('#full-recipe').html(recipeHTML);
+        $('#full-recipe').html("");
+        $('#full-recipe').append(`<div id="recipe-progress"><div class="return-btn"><button class="search_return_btn" onclick="backToSearchResults()">Back to Search Results</button></div></div>`);
+        $('#full-recipe').append(recipeHTML);
         $('#recipes-list').hide()
         $('#simple-search-form').hide();
         $('#full-recipe').show();
-        $('#search-progress').html('<div class="return-btn"><button class="search_return_btn" onclick="backToSearchResults()">Back to Search Results</button></div>');
         getYouTubeVideos(mealDetails.name, mealDetails.video);
     })
     .catch(error => {
@@ -160,7 +161,7 @@ function getRecipeType(type){
     .then(responseJson => {
         scrollToTop();
         $('#recipes-list').html("");
-        $('#search-progress').text('Your Search Results:');
+        $('#recipes-list').append(`<h3>Your Search Results:</h3>`);
         let count = 0;
         let meals = responseJson.meals;
         while(count < meals.length){
@@ -201,7 +202,8 @@ function searchRecipe(phrase,qty){
         if(responseJson.meals.length > 0){
             scrollToTop();
             $('#recipes-list').html("");
-            $('#search-progress').text('Your Search Results:');
+            $('#recipes-list').append(`<h3>Your Search Results:</h3>`);
+            
             let count = 0;
             let meals = responseJson.meals;
             while(count < qty){
@@ -270,6 +272,7 @@ function searchByIngredients(ingredients,qty,searchFiller=0){
         }else{
             scrollToTop();
             $('#recipes-list').html("");
+            $('#recipes-list').append(`<h3>Your Search Results:</h3>`);
             let count = 0;
             let meals = responseJson.meals;
             while(count < qty){

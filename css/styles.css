@@ -52,6 +52,12 @@ h2{
     margin-block-end: 10px;
 }
 
+#recipes-list h3 {
+    width:100%;
+    max-width:900px;
+    margin-bottom:15px;
+}
+
 h3 {
     margin-block-start: 10px;
     margin-block-end: 10px;
@@ -130,8 +136,8 @@ nav {
 }
 
 
-#search-progress {
-    padding:0 0 0 15px;
+#search-progress, #recipe-progress {
+    padding:0;
     font-weight:bold;
     font-size:18px;
     text-align:left;
