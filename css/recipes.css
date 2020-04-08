@@ -53,6 +53,7 @@
     padding-left:15px;
     flex-direction:column;
     margin-top:10px;
+    align-self:flex-start;
 }
 
 .full-recipe-ingredients ul {
