@@ -1,4 +1,4 @@
-let deviceMedia = window.matchMedia("(min-width: 600px)");
+const deviceMedia = window.matchMedia("(min-width: 600px)");
 let defaultMaxResults = 10;
 
     if(deviceMedia.matches){
@@ -28,7 +28,8 @@ function formatFetchUrl(searchType){
 //these functions will format search parameters and then pass it along to the contact function
 function getRecentRecipes(qty=defaultMaxResults){
     //retrieves specified number of most recent recipes
-    let url = formatFetchUrl('recent');
+    const url = formatFetchUrl('recent');
+
     fetch(url)
     .then(response => {
         if(response.ok){
@@ -39,7 +40,7 @@ function getRecentRecipes(qty=defaultMaxResults){
     .then(responseJson => {
         if(responseJson.meals.length > 0){
             let count = 0;
-            let meals = responseJson.meals;
+            const meals = responseJson.meals;
             while(count < qty){
                 $('#recipes-list').append(`
                 <div class="recipe-grid-square" id="recipe-${meals[count]['idMeal']}">
@@ -73,8 +74,8 @@ function searchByRecipeID(recipeID){
     })
     .then(responseJson => {
         scrollToTop();
-        let mealDetails = formatRecipeDetails(responseJson.meals[0]);
-        let recipeHTML = formatRecipeDisplay(mealDetails);
+        const mealDetails = formatRecipeDetails(responseJson.meals[0]);
+        const recipeHTML = formatRecipeDisplay(mealDetails);
         $('#full-recipe').html("");
         $('#full-recipe').append(`<div id="recipe-progress"><div class="return-btn"><button class="search_return_btn" onclick="backToSearchResults()">Back to Search Results</button></div></div>`);
         $('#full-recipe').append(recipeHTML);
@@ -96,7 +97,7 @@ function searchByRecipeID(recipeID){
 
 function getRandomRecipe(){
     //retrieve a random recipe
-    let url = formatFetchUrl('random');
+    const url = formatFetchUrl('random');
         
     fetch(url)
     .then(response => {
@@ -107,8 +108,8 @@ function getRandomRecipe(){
     })
     .then(responseJson => {
         scrollToTop();
-        let mealDetails = formatRecipeDetails(responseJson.meals[0]);
-        let recipeHTML = formatRecipeDisplay(mealDetails);
+        const mealDetails = formatRecipeDetails(responseJson.meals[0]);
+        const recipeHTML = formatRecipeDisplay(mealDetails);
 
         $('#random-result').html(recipeHTML);
         getYouTubeVideos(mealDetails.name, mealDetails.video);
@@ -122,7 +123,7 @@ function getRandomRecipe(){
 
 function getRecipeTypeList(){
     //retrieve list of recipe categories
-    let url = formatFetchUrl('type_list');
+    const url = formatFetchUrl('type_list');
         
     fetch(url)
     .then(response => {
@@ -161,9 +162,9 @@ function getRecipeType(type){
     .then(responseJson => {
         scrollToTop();
         $('#recipes-list').html("");
-        $('#recipes-list').append(`<h3>Your Search Results:</h3>`);
+        $('#recipes-list').append(`<h3 id="search-progress">Your Search Results:</h3>`);
         let count = 0;
-        let meals = responseJson.meals;
+        const meals = responseJson.meals;
         while(count < meals.length){
             if( count >= responseJson.meals.length){
                 break;
@@ -202,10 +203,10 @@ function searchRecipe(phrase,qty){
         if(responseJson.meals.length > 0){
             scrollToTop();
             $('#recipes-list').html("");
-            $('#recipes-list').append(`<h3>Your Search Results:</h3>`);
+            $('#recipes-list').append(`<h3 id="search-progress">Your Search Results:</h3>`);
             
             let count = 0;
-            let meals = responseJson.meals;
+            const meals = responseJson.meals;
             while(count < qty){
                 if( count >= responseJson.meals.length){
                     break;
@@ -229,7 +230,7 @@ function searchRecipe(phrase,qty){
 
     })
     .catch(error => {
-        searchByIngredients(phrase,qty);
+        searchByIngredients(phrase,qty,0);
         //$('#search-progress').text(`Sorry, there was an error: ${error.message}`);
     });
     
@@ -248,10 +249,16 @@ function searchByIngredients(ingredients,qty,searchFiller=0){
         throw new Error();
     })
     .then(responseJson => {
+        console.log(responseJson.meals);
+        console.log(searchFiller);
+        if(responseJson.meals == null && searchFiller == 0){
+            console.log("Test");
+            throw new Error();
+        }
         if(searchFiller){
             scrollToTop();
             let count = searchFiller;
-            let meals = responseJson.meals;
+            const meals = responseJson.meals;
             while(count < qty){
                 if( count >= responseJson.meals.length){
                     break;
@@ -272,9 +279,9 @@ function searchByIngredients(ingredients,qty,searchFiller=0){
         }else{
             scrollToTop();
             $('#recipes-list').html("");
-            $('#recipes-list').append(`<h3>Your Search Results:</h3>`);
+            $('#recipes-list').append(`<h3 id="search-progress">Your Search Results:</h3>`);
             let count = 0;
-            let meals = responseJson.meals;
+            const meals = responseJson.meals;
             while(count < qty){
                 if( count >= responseJson.meals.length){
                     break;
@@ -325,9 +332,9 @@ function formatRecipeDetails(recipe){
 
     for (let key of Object.keys(recipe)) {
         if (key.startsWith('strIngredient') && (recipe[key] != null && recipe[key].length > 0) ) {
-            let lineItem = key.split("Ingredient").pop();
-            let measurement = `strMeasure${lineItem}`;
-            let ingredientLine = `${recipe[key]} - ${recipe[measurement]}`;
+            const lineItem = key.split("Ingredient").pop();
+            const measurement = `strMeasure${lineItem}`;
+            const ingredientLine = `${recipe[key]} - ${recipe[measurement]}`;
             
             ingredientsList.push(ingredientLine);
         }
@@ -346,22 +353,22 @@ function loadFullRecipe(mealId){
 function formatRecipeDisplay(mealDetails){
     let ingredientsHTML = ""
     $.each(mealDetails.ingredients, function(){
-        let list = this;
+        const list = this;
         ingredientsHTML = `${ingredientsHTML}<li>${list}</li>`;
     });
 
     let instructionsHTML = "";
     $.each(mealDetails.instructions, function(){
-        let list = this;
+        const list = this;
         if(list.length > 2){
             instructionsHTML = `${instructionsHTML}<li>${list}</li>`;
         }
     });
 
-    let returnHTML = `
+    const returnHTML = `
     <section class="full-recipe-panel">
         <section class="full-recipe-img">
-            <img src="${mealDetails.img}">
+            <img src="${mealDetails.img}" alt="${mealDetails.name} image" title="${mealDetails.name} image">
             <br>
             <a href="printable.html?recipe=${mealDetails.id}" alt="Open new page to print recipe" target="_blank">print recipe</a>
             <br>

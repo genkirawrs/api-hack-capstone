@@ -54,11 +54,10 @@ function formatQueryParams(params) {
         if (response.ok) {
           return response.json();
         }
-        throw new Error(response.statusText);
+        throw new Error();
       })
       .then(responseJson => displayVideoResults(responseJson,excludeVideoID))
-      .catch(err => {
-          console.log('uho');
-        //$('#js-error-message').text(`Something went wrong: ${err.message}`);
+      .catch(err => {  
+        $('#more-videos').html(`<p><strong>Sorry, we're unable to retrieve recipe videos from YouTube at this time. Please try again later.</strong></p>`);
       });
   }
