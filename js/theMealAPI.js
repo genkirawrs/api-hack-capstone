@@ -309,7 +309,6 @@ function formatRecipeSearch(parameters,type){
 }
 
 function formatRecipeDetails(recipe){
-    console.log(recipe);
     //receives an object and returns something we can use for display
     let meal = {
         id: recipe.idMeal,
