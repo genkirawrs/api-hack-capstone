@@ -288,7 +288,15 @@ footer {
     font-size:13px;
 }
 
-@media screen and (min-width:505px){
+@media screen and (min-width:600px){
+    #simple-form {
+        width:60%;
+    }
+
+    #recipes-list {
+        justify-content:center;
+    }
+
     .recipe-grid-square {
         width:30%;
     }

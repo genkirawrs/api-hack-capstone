@@ -1,4 +1,4 @@
-let deviceMedia = window.matchMedia("(min-width: 505px)");
+let deviceMedia = window.matchMedia("(min-width: 600px)");
 let defaultMaxResults = 10;
 console.log(deviceMedia.matches);
 if(deviceMedia.matches){
