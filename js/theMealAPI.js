@@ -115,7 +115,7 @@ function getRandomRecipe(){
 
     })
     .catch(error => {
-        $('#random-result').html('!Sorry there was an error, please try again later.');
+        $('#random-result').html('Sorry there was an error, please try again later.');
     });
 
 }
