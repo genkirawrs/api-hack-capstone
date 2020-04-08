@@ -188,7 +188,10 @@ section {
 
 #simple-search-form, #random-result{
     width:100%;
-    padding-top:25px;
+}
+
+#simple-search-form{
+        padding-top:25px;
 }
 
 #simple-form, #type-search {
@@ -285,7 +288,7 @@ footer {
     font-size:13px;
 }
 
-@media screen and (min-width:360px){
+@media screen and (min-width:505px){
     .recipe-grid-square {
         width:30%;
     }
@@ -293,7 +296,4 @@ footer {
 
 
 @media screen and (min-width:1000px){
-    html{
-    background-color:#000000;
-    }
 }

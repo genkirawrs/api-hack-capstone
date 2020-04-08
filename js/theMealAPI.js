@@ -1,10 +1,10 @@
-let deviceMedia = window.matchMedia("(min-width: 1000px)");//set back to 360
+let deviceMedia = window.matchMedia("(min-width: 505px)");
 let defaultMaxResults = 10;
-
+console.log(deviceMedia.matches);
 if(deviceMedia.matches){
     defaultMaxResults = 9;
 }
-
+console.log(defaultMaxResults);
 function scrollToTop(){
     $("html, body").animate({ scrollTop: 0 }, "fast");
 }

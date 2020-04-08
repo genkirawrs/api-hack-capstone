@@ -16,7 +16,6 @@ function formatQueryParams(params) {
     let i = 0;
     let vidPos = 0;
     while (i < 3){
-      console.log(i);
       // for each video object in the items 
       //array, add a list item to the results 
       //list with the video title and thumbnail
@@ -24,10 +23,10 @@ function formatQueryParams(params) {
         vidPos++;
       }else{
         $('#video-thumbs').append(
-          `<li style='display:inline-block;margin-bottom:20px;'>
+          `<li>
           <a href="javascript:loadVideoToPlayer('${responseJson.items[vidPos].id.videoId}')">
           <img src='${responseJson.items[vidPos].snippet.thumbnails.default.url}' style='margin-right:10px;'>
-          <h3 style='align-self:flex-start'>${responseJson.items[vidPos].snippet.title}</h3>
+          <h3>${responseJson.items[vidPos].snippet.title}</h3>
           </a>
           </li>`
         );
@@ -38,6 +37,7 @@ function formatQueryParams(params) {
   };
   
   function getYouTubeVideos(query, excludeVideoID='') {
+   // return;
     const params = {
       key: apiKey,
       q: `${query} recipe`,
