@@ -1,8 +1,3 @@
-function sendRequest(){
-alert('TBD');
-
-}
-
 function toggleMenu(){
   $(".nav-links").toggleClass('nav-links-show');
 }
