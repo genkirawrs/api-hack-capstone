@@ -109,6 +109,7 @@
     display:inline-block;
     width:100%;
     position:relative;
+    max-width:600px;
 }
 
 iframe {
@@ -183,4 +184,11 @@ iframe {
         height:280px;
     }
     
+}
+
+@media screen and (min-width:775px){
+    iframe{
+        width:600px;
+        height:450px;
+    }
 }

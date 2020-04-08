@@ -293,7 +293,11 @@ function searchByIngredients(ingredients,qty,searchFiller=0){
         }
     })
     .catch(error => {
-        $('#search-progress').text(`Sorry, no recipes found. Please try another search!`);
+        if(searchFiller > 0){
+            
+        }else{
+            $('#search-progress').text(`Sorry, no recipes found. Please try another search!`);
+        }
     });
 }
 

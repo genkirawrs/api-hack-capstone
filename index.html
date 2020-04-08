@@ -15,8 +15,14 @@
         <div class="nav-bar">
             <h1>Recipe Finder</h1>
             <div id="menu-hamburger"><button type="button" onclick="toggleMenu();"><img src="imgs/icon_hamburger.png" class="nav-hamburger" alt="expand menu" title="expand menu"></button></div>
+            <div id="menu-expanded">
+                <ul>
+                    <li><a href="javascript:loadRecipeRandomizer();" title="Load Recipe Randomizer View">Surprise Me!</a></li>
+                    <li><a href="javascript:loadRecipeSearch();" title="Load Recipe Finder Home">Search for a Recipe</a></li>
+                </ul>                   
+            </div>
         </div>
-        <div class="nav-links">
+        <div id="menu-mobile" class="nav-links">
             <ul>
                 <li><a href="javascript:loadRecipeRandomizer();" title="Load Recipe Randomizer View">Surprise Me!</a></li>
                 <li><a href="javascript:loadRecipeSearch();" title="Load Recipe Finder Home">Search for a Recipe</a></li>
