@@ -3,7 +3,6 @@ function initPrintable(){
     if(url.indexOf('?')!=-1){
 
         let urlSplit = url.split('?')[1].split('&');
-        console.log(urlSplit);
         let variablesList = [];
         
         urlSplit.map(function(entry){
@@ -13,7 +12,7 @@ function initPrintable(){
         if(variablesList[0][0] == 'grocery' || variablesList[0][0] == 'recipe'){
             displayPrintableInfo(variablesList[0][0],variablesList[0][1]);
         }else{
-            console.log('ah...');
+            $('#printable-display').text(`Sorry, there was an error.`);
         }
     }
 }
@@ -27,7 +26,7 @@ function displayPrintableInfo(displayType,recipeID){
         if(response.ok){
             return response.json();
         }
-        throw new Error('hm');
+        throw new Error();
     })
     .then(responseJson => {
         let mealDetails = formatRecipeDetails(responseJson.meals[0]);
@@ -84,8 +83,7 @@ function displayPrintableInfo(displayType,recipeID){
         }
     })
     .catch(error => {
-        console.log("recipe id error!");
-        //$('#search-progress').text(`Sorry, there was an error: ${error.message}`);
+        $('#printable-display').text(`Sorry, there was an error.`);
     });
 
 }

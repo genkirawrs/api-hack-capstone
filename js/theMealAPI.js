@@ -1,10 +1,11 @@
 let deviceMedia = window.matchMedia("(min-width: 600px)");
 let defaultMaxResults = 10;
-console.log(deviceMedia.matches);
-if(deviceMedia.matches){
-    defaultMaxResults = 9;
-}
-console.log(defaultMaxResults);
+
+    if(deviceMedia.matches){
+        defaultMaxResults = 9;
+    }
+
+
 function scrollToTop(){
     $("html, body").animate({ scrollTop: 0 }, "fast");
 }
@@ -36,7 +37,6 @@ function getRecentRecipes(qty=defaultMaxResults){
         throw new Error();
     })
     .then(responseJson => {
-        //console.log(responseJson.meals);
         if(responseJson.meals.length > 0){
             let count = 0;
             let meals = responseJson.meals;
@@ -114,7 +114,6 @@ function getRandomRecipe(){
 
     })
     .catch(error => {
-        console.log(error);
         $('#random-result').html('!Sorry there was an error, please try again later.');
     });
 
@@ -133,7 +132,6 @@ function getRecipeTypeList(){
     })
     .then(responseJson => {
         let categoriesHTML = "";
-        console.log(responseJson);
         $.each(responseJson.meals, function(){
             let cat = this.strCategory;
             categoriesHTML = `${categoriesHTML}<button onclick="getRecipeType('${cat}')">${cat}</button>`;
@@ -192,7 +190,6 @@ function searchRecipe(phrase,qty){
     //retrieve a recipes by search terms
     let url = formatFetchUrl('by_name');
         url = `${url}${phrase}`;
-        console.log(url);
     fetch(url)
     .then(response => {
         if(response.ok){
