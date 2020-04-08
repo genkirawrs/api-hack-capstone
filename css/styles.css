@@ -235,6 +235,10 @@ section {
     padding-top:20px;
 }
 
+#random-panel h2 {
+    text-align:center;
+}
+
 #recipe-categories {
     display:flex;
     flex-wrap:wrap;
